@@ -428,12 +428,18 @@
                 },
                 mouseover: highlightFeature,
             });
+            var myAutolinker = new Autolinker({
+            stripPrefix: {
+                scheme: false,  // Keeps "http://", "https://"
+                www: false      // Keeps "www."
+            }
+            });            
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['logo'] !== null ? '<img src="images/' + String(feature.properties['logo']).replace(/[\\/:]/g, '_').trim().replace(/'/g, '\'').replace(/"/g, '&quot;') + '">' : '') + '</td>\
+                        <td colspan="2" style="text-align: center; font-weight: bold;">' + (feature.properties['logo'] !== null ? '<img src="images/' + String(feature.properties['logo']).replace(/[\\/:]/g, '_').trim().replace(/'/g, '\'').replace(/"/g, '&quot;') + '">' : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Website'] !== null ? autolinker.link(String(feature.properties['Website']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <td colspan="2" style="text-align: center; font-weight: bold;">' + (feature.properties['Website'] !== null ? myAutolinker.link(String(feature.properties['Website']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
